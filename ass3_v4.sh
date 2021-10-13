@@ -4,7 +4,7 @@ scount=0
 
 while true; do # using while loop to keep the script running or to break out of it
   
-  # use if statemnet to account for first search or subseque search
+  # use if statement to account for first search or subsequent search
   if [[ $scount = 0 ]]; then 
      read -p "Hi, enter [1] to search or [2] to exit: "
   else # if user runs the script more than once
@@ -20,7 +20,7 @@ while true; do # using while loop to keep the script running or to break out of 
     clear
    
      # declare array of files named serserv_acc_log.+csv in the working directory and list them out
-     unset logs # clear the search history to aviod duplicated search result
+     unset logs # clear the search history to avoid duplicated search result
      declare -a logs 
      patt="serv_acc_log.+csv$" 
      mennum=1
@@ -46,11 +46,11 @@ while true; do # using while loop to keep the script running or to break out of 
    echo -e "\n"
    read -p "Enter the number of the file in the menu above you wish to search [1,2,3,4 or 5]. Or [6] for searching all files: " sel
    
-   # for case statment option[6], use grep to output all files to meet Advanced Functional Requirements 2
+   # for case statement option[6], use grep to output all files to meet Advanced Functional Requirements 2
     case $sel in
      [1-5]) fileopt=${logs[$sel-1]} # for option 1 to 5, use grep to analayze the representing file
          grep "suspicious$" $fileopt > tempfile.csv;; # output only the contents classed suspicious from the selected file & output the content, for further action
-     6)   fileopt=${logs[*]} # for option 6, use grep to analayze  all files found
+     6)   fileopt=${logs[*]} # for option 6, use grep to analayse  all files found
          grep "suspicious$" $fileopt > tempfile.csv;;# output only the contents classed suspicious from all matching files, for further action
      *)   echo "Invaild selection, exiting programme." && exit 1;;
     esac
@@ -67,17 +67,17 @@ while true; do # using while loop to keep the script running or to break out of 
    filename1=$(date +%d%m%Y_%T) # with 2 provided options, files shall be named after current date& time to create unique file names
    filename2=$(date +%T_%d%m%Y) 
    
-   # as 2 formats are to be choosen, example of each format is provided for easy understand
+   # as 2 formats are to be chosen, example of each format is provided for easy understand
    echo -e "\n"
    echo -e "File Name Formats:\n1 date_time i.e.[30092021_15:39:07]\n2 time_date i.e. [15:39:07_30092021]\n"
    read -p 'Enter the number of format in the menu above you wish to name your output file [1 or 2]: ' selffilename #prompt user to choose from option 1 or 2 to name his file
 
-    # use case function, rename the outputed search result with mv command according to user's choice of format
+    # use case function, rename the output search result with mv command according to user's choice of format
     # remove the output file of grep 'tempfile.csv' as it shall be no longer needed
     case $selffilename in
       1) mv tempresult.csv $filename1.csv && rm tempfile.csv && echo -e "\nThe output file $filename1.csv is saved.\n" && ls;; 
       2) mv tempresult.csv $filename2.csv && rm tempfile.csv && echo -e "\nThe output file $filename2.csv is saved.\n" && ls;; 
-      *) mv tempresult.csv $filename1.csv && rm tempfile.csv && echo -e "\nInvalid input. The output file is saved as $filename1.csv anyway.\n" && ls;; #otherwise, do the task in option 1's way to aviod output file being overwrite due to file name overlapping  
+      *) mv tempresult.csv $filename1.csv && rm tempfile.csv && echo -e "\nInvalid input. The output file is saved as $filename1.csv anyway.\n" && ls;; #otherwise, do the task in option 1's way to avoid output files being overlapped
     esac
    }
 
@@ -140,7 +140,7 @@ while true; do # using while loop to keep the script running or to break out of 
 
         cct=$value
         
-        # in case statment, use awk searching for all input value with '>' '<' and '=' operators; 
+        # in case statement, use awk searching for all input value with '>' '<' and '=' operators; 
         # to meet Advanced Functional Requirements 3, sum all the matching values up& display in last row with awk
         case $range in
          1) awk ' BEGIN {FS=","; ttlpackets=0; ttlbytes=0} 
@@ -187,7 +187,7 @@ while true; do # using while loop to keep the script running or to break out of 
      7)  read -p "Enter a value you wish to search: " bvalue
          read -p "Choose to search 1/ greater than, 2/ less than, 3/ equal to or 4/ not equal to $value [1,2,3 or 4]: " brange
          
-         # in case statment, use awk searching for all input value with '>' '<' and '=' operators; 
+         # in case statement, use awk searching for all input value with '>' '<' and '=' operators; 
          # to meet Advanced Functional Requirements 3, sum all the matching values up& display in last row with awk
          case $brange in
           1) awk ' BEGIN {FS=","; ttlpackets=0; ttlbytes=0} 
